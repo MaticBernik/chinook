@@ -95,8 +95,15 @@ var genres = function(artist, callback) {
         console.log(error);
         callback('<strong>Something went wrong!</strong>');
       } else {
-        var result = '<h5>Genres</h5><div id="genres">' + 
-          'No genres for this artist' + 
+          var zanri="|";
+          rows.forEach(function (row){
+            zanri=zanri+row.Name+'|';
+          });
+          if(zanri.length==1){
+            zanri='No genres for this artist';
+          }/*else if(zanri.charAt(zanri.length-1=='|'))*/
+          var result = '<h5>Genres</h5><div id="genres">' + 
+          zanri + 
           '</div>';
         callback(result);
       }
