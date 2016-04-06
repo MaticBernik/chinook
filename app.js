@@ -105,6 +105,15 @@ var genres = function(artist, callback) {
 var express = require('express');
 var app = express();
 
+app.listen(process.env.PORT,function(){
+    console.log('Streznik poslusa na portu: '+process.env.PORT);
+});
+
+app.get('/', function (req, res) {
+  //res.send('Povezani na spletno stran!');
+  res.redirect('/artists/1');
+});
+
 /* settings for static application files */
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -187,7 +196,7 @@ app.get('/pages', function(request, response) {
       console.log(error);
       response.sendStatus(500);
     } else
-      response.send({pages: Math.ceil(row.Artists / 33)});
+      response.send({pages: Math.ceil(row.Artists / 33)}); //round up?
   });
 });
 
